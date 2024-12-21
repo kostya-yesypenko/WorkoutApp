@@ -36,4 +36,8 @@
         android:name="com.example.kursovavavaaa.FeedbackFragment"
         android:label="fragment_feedback"
         tools:layout="@layout/fragment_feedback" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.kursovavavaaa.EditProfileFragment"
+        android:label="EditProfileFragment" />
 </navigation>
