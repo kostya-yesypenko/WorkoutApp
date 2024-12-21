@@ -11,7 +11,15 @@ constraintlayout = "2.1.4"
 navigationFragmentKtx = "2.6.0"
 navigationUiKtx = "2.6.0"
 
+roomVersion = "2.6.1"
+compilerKspVersion = "2.0.21-1.0.27"
+
+
 [libraries]
+androidx-room = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
+androidx-room-ksp = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
+
+
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -25,4 +33,5 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compilerKsp = { id = "com.google.devtools.ksp", version.ref = "compilerKspVersion" }
 
