@@ -36,11 +36,11 @@ class ExercisesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val navController = findNavController()
         val recyclerView = binding.exercisesList
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val adapter = ExerciseItemAdapter()
+        val adapter = ExerciseItemAdapter(navController)
 
         binding.apply {
             binding.exercisesList.layoutManager = LinearLayoutManager(requireContext())

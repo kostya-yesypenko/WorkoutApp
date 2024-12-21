@@ -1,6 +1,7 @@
 package com.example.kursovavavaaa
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -18,9 +19,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    private val adapter = ExerciseItemAdapter()
-
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Кишки", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
+
+            val navController = findNavController(R.id.nav_host_fragment_content_main)
+            navController.navigate(R.id.feedbackFragment)
         }
 
     }
@@ -55,8 +55,14 @@ class MainActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        Log.println(Log.DEBUG, "AAA", "AAAAAAAA")
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.settingsFragment -> {
+                val navController = findNavController(R.id.nav_host_fragment_content_main)
+                navController.navigate(R.id.settingsFragment)
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

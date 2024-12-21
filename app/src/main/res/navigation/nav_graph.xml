@@ -3,19 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/exercises_fragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/home_fragment"
+        android:id="@+id/homeFragment"
         android:name="com.example.kursovavavaaa.HomeFragment"
         android:label="@string/home_fragment_label"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/exercises_fragment"
+        android:id="@+id/exercisesFragment"
         android:name="com.example.kursovavavaaa.ExercisesFragment"
-        android:label="@string/exercises_fragment_label" />
+        android:label="@string/exercises_fragment_label" >
+        <action
+            android:id="@+id/action_exercisesFragment_to_excerciseDetailsFragment"
+            app:destination="@id/excerciseDetailsFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/user_fragment"
+        android:id="@+id/userFragment"
         android:name="com.example.kursovavavaaa.UserFragment"
         android:label="@string/user_fragment_label"/>
+    <fragment
+        android:id="@+id/excerciseDetailsFragment"
+        android:name="com.example.kursovavavaaa.ExcerciseDetailsFragment"
+        android:label="fragment_excercise_details"
+        tools:layout="@layout/fragment_excercise_details" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.kursovavavaaa.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="com.example.kursovavavaaa.FeedbackFragment"
+        android:label="fragment_feedback"
+        tools:layout="@layout/fragment_feedback" />
 </navigation>
