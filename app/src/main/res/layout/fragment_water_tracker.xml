@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- Water Icon -->
+    <ImageView
+        android:id="@+id/imageViewWaterIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/water"
+        android:contentDescription="@string/water_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Progress Text -->
+    <TextView
+        android:id="@+id/textViewWaterProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 / 2000 ml"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/imageViewWaterIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progressBarWater"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:progress="0"
+        android:max="100"
+        app:layout_constraintTop_toBottomOf="@id/textViewWaterProgress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Button Row -->
+    <LinearLayout
+        android:id="@+id/buttonRow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/progressBarWater"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/buttonAddWater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+250 ml" />
+
+        <Button
+            android:id="@+id/buttonReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/buttonSetTarget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Target" />
+    </LinearLayout>
+
+    <!-- Hidden Input Field and Apply Button -->
+    <EditText
+        android:id="@+id/editTextNewTarget"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter new target (ml)"
+        android:inputType="number"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/buttonRow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/buttonApplyNewTarget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apply"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/editTextNewTarget"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

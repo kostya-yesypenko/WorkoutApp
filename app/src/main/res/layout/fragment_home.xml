@@ -1,67 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.HomeFragment"
-    android:paddingTop="0dp"
-    android:paddingBottom="0dp">
+    android:padding="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
 
-        <!-- Header Section -->
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="wrap_content"
+        <!-- BMI Calculator Container -->
+        <FrameLayout
+            android:id="@+id/bmiContainer"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Welcome to Your Health Dashboard"
-            android:textSize="24sp"
-            android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="16dp"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- BMI Scale View Section -->
-        <com.example.kursovavavaaa.ui.fragments.BMIScaleView
-            android:id="@+id/bmiScaleView"
+        <!-- Water Tracker Container -->
+        <FrameLayout
+            android:id="@+id/waterTrackerContainer"
             android:layout_width="0dp"
-            android:layout_height="200dp"
-            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/textViewHome"
-            android:layout_marginBottom="0dp" /> <!-- Reduced bottom margin -->
-
-        <!-- BMI Information Section -->
-        <TextView
-            android:id="@+id/textViewHome"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your BMI: 25.0\nCategory: Overweight"
-            android:textSize="18sp"
-            android:textColor="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/bmiScaleView"
+            app:layout_constraintTop_toBottomOf="@id/bmiContainer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/> <!-- Added top margin to make it tighter -->
-
-        <!-- Other tools section (Example placeholder for other tools) -->
-        <TextView
-            android:id="@+id/textViewOtherTools"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Other Tools"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/textViewHome"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp"/>
-
+            android:layout_marginTop="16dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
