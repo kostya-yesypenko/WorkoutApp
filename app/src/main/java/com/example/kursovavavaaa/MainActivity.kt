@@ -1,5 +1,6 @@
 package com.example.kursovavavaaa
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
@@ -10,6 +11,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kursovavavaaa.data.Database
@@ -42,6 +44,21 @@ class MainActivity : AppCompatActivity() {
             val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.feedbackFragment)
         }
+
+//        val currentMode = AppCompatDelegate.getDefaultNightMode()
+//
+//        val preferences = getSharedPreferences("theme_prefs", Context.MODE_PRIVATE)
+//        preferences.edit().putBoolean("is_dark_mode", isDarkMode).apply()
+
+// 取得
+//        val isDarkMode = preferences.getBoolean("is_dark_mode", false)
+//        Log.println(Log.DEBUG,"AAA",currentMode.toString())
+//        val isDarkMode = false
+//        if (isDarkMode) {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//        } else {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

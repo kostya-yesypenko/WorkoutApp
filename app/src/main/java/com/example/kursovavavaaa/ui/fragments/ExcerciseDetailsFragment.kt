@@ -15,8 +15,8 @@ class ExcerciseDetailsFragment : Fragment() {
 
     private val handler = Handler(Looper.getMainLooper())
     private var progress = 0
-    private val duration = 10000 // 10秒 (ミリ秒)
-    private var isRunning = false // 進行中かどうかを記録
+    private val duration = 10000
+    private var isRunning = false
 
     private var _binding: FragmentExcerciseDetailsBinding? = null
 
@@ -56,7 +56,7 @@ class ExcerciseDetailsFragment : Fragment() {
         val maxProgress = progressBar.max
 
         isRunning = true
-        binding.button.text = "中止" // ボタンのテキストを中止に変更
+        binding.button.text = "Зупинити"
 
         handler.post(object : Runnable {
             override fun run() {
@@ -68,22 +68,28 @@ class ExcerciseDetailsFragment : Fragment() {
                     handler.postDelayed(this, interval)
                 } else {
                     progressBar.progress = maxProgress
-                    stopProgressBar() // 完了時に停止
+                    finishProgressBar()
                 }
             }
         })
     }
 
-    private fun stopProgressBar() {
-        binding.button.text = "開始" // ボタンのテキストを開始に変更
+    private fun finishProgressBar() {
+        binding.button.visibility = View.INVISIBLE
         isRunning = false
-        handler.removeCallbacksAndMessages(null) // 全てのタスクを停止
+        handler.removeCallbacksAndMessages(null)
+    }
+
+    private fun stopProgressBar() {
+        binding.button.text = "Продовжити"
+        isRunning = false
+        handler.removeCallbacksAndMessages(null)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null // メモリリークを防ぐ
+        _binding = null
         isRunning = false
-        handler.removeCallbacksAndMessages(null) // 全てのタスクを停止
+        handler.removeCallbacksAndMessages(null)
     }
 }

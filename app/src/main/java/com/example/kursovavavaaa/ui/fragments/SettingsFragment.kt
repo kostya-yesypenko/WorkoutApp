@@ -1,11 +1,13 @@
 package com.example.kursovavavaaa.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.kursovavavaaa.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
@@ -13,13 +15,18 @@ class SettingsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private fun showChoiceDialog() {
-        val choices = arrayOf("Світлий", "Темний", "Системний") // 選択肢
-        var selectedItem = -1 // 選択されたアイテムのインデックス
+        val choices = arrayOf("Світлий", "Темний")
+        var selectedItem = -1
 
         AlertDialog.Builder(requireContext())
             .setTitle("Обіреть вигляд")
             .setSingleChoiceItems(choices, selectedItem) { _, which ->
-                selectedItem = which // 選択されたインデックスを更新
+                selectedItem = which
+                if (selectedItem == 1)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                else
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
             }
             .setPositiveButton("Готово") { _, _ ->
             }
@@ -35,9 +42,14 @@ class SettingsFragment : Fragment() {
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
-        binding.button2.setOnClickListener {
+        binding.themeState.setOnClickListener {
             showChoiceDialog()
         }
+        if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES)
+            binding.themeState.text = "Світлий"
+        else
+            binding.themeState.text = "Темний"
+
         return binding.root
     }
 
