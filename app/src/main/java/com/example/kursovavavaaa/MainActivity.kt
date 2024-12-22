@@ -12,10 +12,10 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kursovavavaaa.data.Database
 import com.example.kursovavavaaa.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity() {
             val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.feedbackFragment)
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

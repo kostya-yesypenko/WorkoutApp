@@ -11,12 +11,13 @@ constraintlayout = "2.1.4"
 navigationFragmentKtx = "2.6.0"
 navigationUiKtx = "2.6.0"
 
-roomVersion = "2.6.1"
+roomVersion = "2.5.0"
 
 
 
 [libraries]
 androidx-room = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
+
 
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

@@ -1,6 +1,6 @@
-package com.example.kursovavavaaa.data
+package com.example.kursovavavaaa.data.entity
 
-data class Statistics(
+data class Statistic (
     val pointsOverall: Int,
     val completedExercises: List<Completed>,
     val completedWorkouts: List<Completed>
