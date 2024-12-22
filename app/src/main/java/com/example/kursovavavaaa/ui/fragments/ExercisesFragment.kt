@@ -1,4 +1,4 @@
-package com.example.kursovavavaaa
+package com.example.kursovavavaaa.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kursovavavaaa.ExerciseItem
+import com.example.kursovavavaaa.ExerciseItemAdapter
 import com.example.kursovavavaaa.databinding.FragmentExercisesBinding
 
 fun a():ArrayList<ExerciseItem> {

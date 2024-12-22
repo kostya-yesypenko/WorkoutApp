@@ -4,113 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserFragment">
+    tools:context=".ui.fragments.UserFragment">
 
-
-    <LinearLayout
-        android:id="@+id/userMetricsLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
-        android:orientation="vertical"
-        app:flow_horizontalGap="20dp"
-        app:flow_verticalGap="20dp"
+    <Button
+        android:id="@+id/editBtn"
+        style="@style/Widget.Material3.Button.Icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:elevation="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:cornerRadius="500dp"
+        app:icon="@drawable/edit"
+        app:iconPadding="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/greetingsMessage">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/userHeightLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Зріст"
-                android:textSize="22dp" />
-
-            <TextView
-                android:id="@+id/userHeightValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="70кг"
-                android:textSize="22dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/userWeigthLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Вага"
-                android:textSize="22dp" />
-
-            <TextView
-                android:id="@+id/userWeightValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="70кг"
-                android:textSize="22dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/userAgeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Вік"
-                android:textSize="22dp" />
-
-            <TextView
-                android:id="@+id/userAgeValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="70кг"
-                android:textSize="22dp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/greetingsMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Вітаємо, Користувачу!"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userImgCard" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/userImgCard"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="50dp"
         app:cardCornerRadius="150dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/editBtn">
 
         <ImageView
             android:id="@+id/userImg"
@@ -120,20 +41,123 @@
 
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/editBtn"
-        style="@style/Widget.Material3.Button.Icon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <TextView
+        android:id="@+id/greetingsMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вітаємо, Користувачу!"
+        android:textSize="22dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:elevation="0dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        app:cornerRadius="500dp"
-        app:icon="@drawable/edit"
-        app:iconPadding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userImgCard" />
+
+    <LinearLayout
+        android:id="@+id/userMetricsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Вкажіть свої дані"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/greetingsMessage">
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="230dp"
+                android:layout_height="fill_parent"
+                android:text="Зріст"
+                android:textSize="22sp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:text="0"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:layout_marginLeft="20dp"/>
+
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:text="См"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="230dp"
+                android:layout_height="fill_parent"
+                android:text="Вага"
+                android:textSize="22sp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:text="0"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:text="Кг"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="230dp"
+                android:layout_height="fill_parent"
+                android:text="Рік"
+                android:textSize="22sp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:text="0"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:text="Р"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

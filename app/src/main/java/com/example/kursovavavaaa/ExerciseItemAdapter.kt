@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
-import androidx.navigation.get
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kursovavavaaa.databinding.ExerciseItemBinding
+import com.example.kursovavavaaa.ui.fragments.a
 
 
 class ExerciseItemAdapter(private val navController: NavController) :

@@ -1,4 +1,4 @@
-package com.example.kursovavavaaa
+package com.example.kursovavavaaa.ui.fragments
 
 import android.os.Bundle
 import android.os.Handler
