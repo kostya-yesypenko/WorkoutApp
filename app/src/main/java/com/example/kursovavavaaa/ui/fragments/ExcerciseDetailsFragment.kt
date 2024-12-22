@@ -75,14 +75,15 @@ class ExcerciseDetailsFragment : Fragment() {
     }
 
     private fun stopProgressBar() {
-        isRunning = false
         binding.button.text = "開始" // ボタンのテキストを開始に変更
+        isRunning = false
         handler.removeCallbacksAndMessages(null) // 全てのタスクを停止
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null // メモリリークを防ぐ
-        stopProgressBar() // 画面破棄時に停止
+        isRunning = false
+        handler.removeCallbacksAndMessages(null) // 全てのタスクを停止
     }
 }
