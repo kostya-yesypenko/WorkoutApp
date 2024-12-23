@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.kursovavavaaa.R
 import com.example.kursovavavaaa.databinding.FragmentBmiCalculatorBinding
 
 class BMICalculatorFragment : Fragment() {
@@ -27,12 +29,14 @@ class BMICalculatorFragment : Fragment() {
 
         val bmi = calculateBMI(weight, height)
         val category = getBMICategory(bmi)
+        val color = getCategoryColor(bmi)
 
         // Update BMIScaleView
         binding.bmiScaleView.setBmiValue(bmi)
 
-        // Update result text
+        // Update result text and set its color
         binding.textViewBmiInfo.text = "Your BMI: $bmi\nCategory: $category"
+        binding.textViewBmiInfo.setTextColor(ContextCompat.getColor(requireContext(), color))
     }
 
     private fun calculateBMI(weight: Float, height: Float): Float {
@@ -45,6 +49,15 @@ class BMICalculatorFragment : Fragment() {
             bmi in 18.5..24.9 -> "Normal weight"
             bmi in 25.0..29.9 -> "Overweight"
             else -> "Obesity"
+        }
+    }
+
+    private fun getCategoryColor(bmi: Float): Int {
+        return when {
+            bmi < 18.5 -> R.color.underweightColor // Light blue
+            bmi in 18.5..24.9 -> R.color.normalColor // Light green
+            bmi in 25.0..29.9 -> R.color.overweightColor // Yellow
+            else -> R.color.obesityColor // Red
         }
     }
 

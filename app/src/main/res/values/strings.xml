@@ -19,4 +19,12 @@
         22222
     </string>
     <string name="hello_blank_fragment">3</string>
+
+    <string-array name="activity_levels">
+        <item>Sedentary</item>
+        <item>Light activity</item>
+        <item>Moderate activity</item>
+        <item>Very active</item>
+        <item>Extra active</item>
+    </string-array>
 </resources>
