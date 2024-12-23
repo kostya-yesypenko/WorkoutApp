@@ -1,6 +1,15 @@
 package com.example.kursovavavaaa
 
+import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
@@ -12,10 +21,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.NotificationCompat
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kursovavavaaa.data.Database
 import com.example.kursovavavaaa.databinding.ActivityMainBinding
+import java.util.Calendar
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -45,21 +57,39 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.feedbackFragment)
         }
 
-//        val currentMode = AppCompatDelegate.getDefaultNightMode()
-//
-//        val preferences = getSharedPreferences("theme_prefs", Context.MODE_PRIVATE)
-//        preferences.edit().putBoolean("is_dark_mode", isDarkMode).apply()
 
-// 取得
-//        val isDarkMode = preferences.getBoolean("is_dark_mode", false)
-//        Log.println(Log.DEBUG,"AAA",currentMode.toString())
-//        val isDarkMode = false
-//        if (isDarkMode) {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//        } else {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//        }
+        scheduleMessageWithAlarmManager(this)
+
     }
+
+    @SuppressLint("ScheduleExactAlarm")
+    fun scheduleMessageWithAlarmManager(context: Context) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val intent = Intent(context, NotificationReceiver::class.java)
+        val pendingIntent =
+            PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 9)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+        }
+
+        if (calendar.timeInMillis < System.currentTimeMillis()) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1)
+        }
+
+        val triggerTime = calendar.timeInMillis
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            triggerTime,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent
+        )
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
