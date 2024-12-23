@@ -2,18 +2,12 @@ package com.example.kursovavavaaa
 
 import android.annotation.SuppressLint
 import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -22,9 +16,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.NotificationCompat
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kursovavavaaa.data.Database
 import com.example.kursovavavaaa.databinding.ActivityMainBinding
 import java.util.Calendar
@@ -69,6 +61,10 @@ class MainActivity : AppCompatActivity() {
 
 
         scheduleMessageWithAlarmManager(this)
+
+        // Create user in database
+        val db = Database(this, null)
+        db.createUser()
 
     }
 

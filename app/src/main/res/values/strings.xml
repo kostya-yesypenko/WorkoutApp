@@ -27,4 +27,10 @@
         <item>Very active</item>
         <item>Extra active</item>
     </string-array>
+
+    <string-array name="gender_options">
+        <item>Не вказано</item>
+        <item>Чоловік</item>
+        <item>Жінка</item>
+    </string-array>
 </resources>

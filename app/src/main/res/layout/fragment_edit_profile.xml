@@ -14,12 +14,15 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        android:backgroundTint="#BB0202"
         android:elevation="0dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="Збросити"
+        android:textColor="@color/white"
         app:cornerRadius="500dp"
         app:iconPadding="0dp"
+        app:iconTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,8 +30,8 @@
         android:id="@+id/userImgCard"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        app:cardCornerRadius="150dp"
         android:layout_marginTop="30dp"
+        app:cardCornerRadius="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resetBtn">
@@ -71,14 +74,14 @@
             <TextView
                 android:layout_width="200dp"
                 android:layout_height="fill_parent"
+                android:gravity="center_vertical"
                 android:text="Ім'я"
-                android:textSize="22sp"
-                android:gravity="center_vertical"/>
+                android:textSize="22sp" />
 
             <EditText
                 android:id="@+id/nameEdit"
                 android:layout_width="150dp"
-                android:layout_height="fill_parent"/>
+                android:layout_height="fill_parent" />
 
         </LinearLayout>
 
@@ -90,23 +93,23 @@
             <TextView
                 android:layout_width="230dp"
                 android:layout_height="fill_parent"
+                android:gravity="center_vertical"
                 android:text="Зріст"
-                android:textSize="22sp"
-                android:gravity="center_vertical"/>
+                android:textSize="22sp" />
 
             <EditText
                 android:id="@+id/heightEdit"
-                android:layout_width="50dp"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="20dp"/>
+                android:layout_width="70dp"
+                android:layout_height="fill_parent" />
+
 
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="fill_parent"
-                android:text="См"
-                android:textSize="22sp"
                 android:gravity="center"
-                android:textAlignment="center"/>
+                android:text="См"
+                android:textAlignment="center"
+                android:textSize="22sp" />
 
         </LinearLayout>
 
@@ -118,23 +121,22 @@
             <TextView
                 android:layout_width="230dp"
                 android:layout_height="fill_parent"
+                android:gravity="center_vertical"
                 android:text="Вага"
-                android:textSize="22sp"
-                android:gravity="center_vertical"/>
+                android:textSize="22sp" />
 
             <EditText
                 android:id="@+id/weightEdit"
-                android:layout_width="50dp"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="20dp"/>
+                android:layout_width="70dp"
+                android:layout_height="fill_parent" />
 
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="fill_parent"
-                android:text="Кг"
-                android:textSize="22sp"
                 android:gravity="center"
-                android:textAlignment="center"/>
+                android:text="Кг"
+                android:textAlignment="center"
+                android:textSize="22sp" />
 
         </LinearLayout>
 
@@ -146,23 +148,22 @@
             <TextView
                 android:layout_width="230dp"
                 android:layout_height="fill_parent"
-                android:text="Рік"
-                android:textSize="22sp"
-                android:gravity="center_vertical"/>
+                android:gravity="center_vertical"
+                android:text="Вік"
+                android:textSize="22sp" />
 
             <EditText
                 android:id="@+id/ageEdit"
-                android:layout_width="50dp"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="20dp"/>
+                android:layout_width="70dp"
+                android:layout_height="fill_parent" />
 
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="fill_parent"
-                android:text="Р"
-                android:textSize="22sp"
                 android:gravity="center"
-                android:textAlignment="center"/>
+                android:text="Р"
+                android:textAlignment="center"
+                android:textSize="22sp" />
 
         </LinearLayout>
 
@@ -174,14 +175,16 @@
             <TextView
                 android:layout_width="200dp"
                 android:layout_height="fill_parent"
-                android:text="Рік"
-                android:textSize="22sp"
-                android:gravity="center_vertical"/>
+                android:gravity="center_vertical"
+                android:text="Стать"
+                android:textSize="22sp" />
 
             <Spinner
                 android:id="@+id/genderEdit"
                 android:layout_width="150dp"
-                android:layout_height="fill_parent" />
+                android:layout_height="fill_parent"
+                android:entries="@array/gender_options"
+                android:spinnerMode="dropdown"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -189,9 +192,8 @@
     <Button
         android:id="@+id/saveButton"
         style="@style/Widget.Material3.Button.Icon"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="40dp"
         android:layout_marginTop="20dp"
         android:elevation="0dp"
         android:insetTop="0dp"
@@ -200,6 +202,7 @@
         app:cornerRadius="500dp"
         app:iconPadding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userMetricsLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

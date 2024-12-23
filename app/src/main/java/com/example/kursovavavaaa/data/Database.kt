@@ -5,6 +5,8 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteDatabase.CursorFactory
 import android.database.sqlite.SQLiteOpenHelper
+import android.widget.Toast
+import com.example.kursovavavaaa.data.SQLQueries.UsersQueries
 import com.example.kursovavavaaa.data.entity.User
 
 // Database class
@@ -13,118 +15,46 @@ class Database(val context: Context, factory: CursorFactory?) :
 
     // Create database tables on first run
     override fun onCreate(db: SQLiteDatabase?) {
+        // Return if database is does not exist
         if (db == null) return
 
-        // Define the query (users, statistics, completed_exercises, exercises, complexities, completed_workouts, workouts, exercises_in_workout)
-        val create_users: String = """
-                CREATE TABLE users (
-                    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL,
-                    height REAL NOT NULL,
-                    weight REAL NOT NULL,
-                    gender TEXT NOT NULL,
-                    age INTEGER NOT NULL,
-                    statistics_id INTEGER, 
-                    FOREIGN KEY (statistics_id) REFERENCES statistics(id)
-                );
-            """.trimIndent()
+        // Create the users table
+        val createUserTable = UsersQueries().createUsersTable()
+        executeQuery(db, createUserTable)
 
-        db.execSQL(create_users)
-
-        val create_statistic: String = """
-            CREATE TABLE statistics (
-                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
-                pointsOverall INTEGER NOT NULL
-            );
-         """.trimIndent()
-
-        db.execSQL(create_statistic)
-
-        val create_completed_exercises: String = """
-            CREATE TABLE completed_exercises (  
-                statistic_id INTEGER NOT NULL,  
-                exercise_id INTEGER NOT NULL,
-                FOREIGN KEY (statistic_id) REFERENCES statistics(id),
-                FOREIGN KEY (exercise_id) REFERENCES exercises(id)
-            );
-        """.trimIndent()
-
-        db.execSQL(create_completed_exercises)
-            
-        val create_exercises: String = """
-            CREATE TABLE exercises (
-                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
-                name TEXT NOT NULL, 
-                description TEXT NOT NULL,  
-                image TEXT NOT NULL, 
-                type TEXT NOT NULL,
-                complexity_id INTEGER NOT NULL,
-                FOREIGN KEY (complexity_id) REFERENCES complexities(id)  
-            );
-        """.trimIndent()
-
-        db.execSQL(create_exercises)
-
-        val create_complexities: String = """
-            CREATE TABLE complexities (
-                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                reps INTEGER NOT NULL,
-                points INTEGER NOT NULL,
-                FOREIGN KEY (exercise_id) REFERENCES exercises(id)
-            );
-        """.trimIndent()
-
-
-        db.execSQL(create_complexities)
-
-        val create_completed_workouts: String = """
-            CREATE TABLE completed_workouts (
-                statistic_id INTEGER NOT NULL,
-                workout_id INTEGER NOT NULL,  
-                FOREIGN KEY (statistic_id) REFERENCES statistics(id),
-                FOREIGN KEY (workout_id) REFERENCES workouts(id)
-            );
-        """.trimIndent()
-
-        db.execSQL(create_completed_workouts)
-
-        val create_workouts: String = """
-            CREATE TABLE workouts (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,  
-                name TEXT NOT NULL,  
-                description TEXT NOT NULL,
-                image TEXT NOT NULL,
-                type TEXT NOT NULL
-            );
-        """.trimIndent()
-
-        db.execSQL(create_workouts)
-
-        val create_exercises_in_workout: String = """
-            CREATE TABLE exercises_in_workout (
-                workout_id INTEGER, 
-                exercise_id INTEGER, 
-                PRIMARY KEY (workout_id, exercise_id), 
-                FOREIGN KEY (workout_id) REFERENCES workouts(id), 
-                FOREIGN KEY (exercise_id) REFERENCES exercises(id) 
-            );
-        """.trimIndent()
-
-        // Execute the query
-        db.execSQL(create_exercises_in_workout)
-
-        // Create empty user
-        createUser()
     }
 
-    override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
+    // Update database actions
+    override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
+        // Delete the users table
+        val deleteUserTable = UsersQueries().deleteUsersTable()
+        executeQuery(db!!, deleteUserTable)
     }
+
+    // Create the users table
+    private fun executeQuery(db: SQLiteDatabase, query: String): Boolean {
+        // Try to execute the query
+        try {
+            // Execute the query
+            db.execSQL(query)
+        }
+        // Catch errors and display them
+        catch (e: Exception) {
+            // Show error message
+            Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
+            // return false if unsuccessful
+            return false
+        }
+
+        // return true if successful
+        return true
+    }
+
 
     // Create empty user
     fun createUser(): Boolean {
         // Get the user
-        val user: User? = getUser() ?: null
+        val user: User? = getUser()
 
         // If user is not null, return false
         if (user != null) return false
@@ -133,10 +63,10 @@ class Database(val context: Context, factory: CursorFactory?) :
         val values = ContentValues()
 
         // Put the values
-        values.put("name", "")
+        values.put("name", "Користувач")
         values.put("height", 0.0)
         values.put("weight", 0.0)
-        values.put("gender", "")
+        values.put("gender", "Не вказано")
         values.put("age", 0)
 
         // Get the database
@@ -153,6 +83,7 @@ class Database(val context: Context, factory: CursorFactory?) :
         // Define the values
         val values = ContentValues()
 
+
         // Put the values
         values.put("name", user.name)
         values.put("height", user.height)
@@ -168,6 +99,7 @@ class Database(val context: Context, factory: CursorFactory?) :
         val whereArgs = arrayOf(user.id.toString())
         db.update("users", values, whereClause, whereArgs)
     }
+
 
     // Get the user
     fun getUser(): User? {
