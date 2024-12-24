@@ -8,7 +8,7 @@ class DifficultyQuiries {
             "time INTEGER," +
             "repsMult REAL," +
             "pointsMult REAL," +
-            "calories INTEGER" +
+            "caloriesMult REAL" +
             ");"
 
     // Return the create difficulty query

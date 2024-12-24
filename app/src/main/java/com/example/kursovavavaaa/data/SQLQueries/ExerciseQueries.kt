@@ -7,11 +7,10 @@ class ExerciseQueries {
             "name TEXT," +
             "description TEXT," +
             "type TEXT," +
-            "difficulty TEXT," +
             "image TEXT," +
             "points INTEGER," +
-            "calories INTEGER," +
-            "time INTEGER" +
+            "reps INTEGER," +
+            "calories INTEGER" +
             ");"
 
     // Return the create exercise query

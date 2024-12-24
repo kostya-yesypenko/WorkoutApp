@@ -172,9 +172,8 @@ class Database(val context: Context, factory: CursorFactory?) :
                     description = cursor.getString(cursor.getColumnIndexOrThrow("description")),
                     image = cursor.getString(cursor.getColumnIndexOrThrow("image")),
                     type = cursor.getString(cursor.getColumnIndexOrThrow("type")),
-                    difficulty = cursor.getString(cursor.getColumnIndexOrThrow("difficulty")),
                     points = cursor.getInt(cursor.getColumnIndexOrThrow("points")),
-                    time = cursor.getInt(cursor.getColumnIndexOrThrow("time")),
+                    reps = cursor.getInt(cursor.getColumnIndexOrThrow("reps")),
                     calories = cursor.getInt(cursor.getColumnIndexOrThrow("calories"))
                 )
                 exercises.add(exercise)
@@ -194,19 +193,17 @@ class Database(val context: Context, factory: CursorFactory?) :
                 description = "Push-ups are a great exercise for your chest, shoulders, and triceps. They can be done anywhere and require no equipment.",
                 image = "pushups",
                 type = "Strength",
-                difficulty = "Beginner",
                 calories = 100,
+                reps = 10,
                 points = 10,
-                time = 30
             ),
             Exercise(
                 name = "Squats",
                 description = "Squats help strengthen your legs and glutes. They are essential for lower body strength and stability.",
                 image = "squats",
                 type = "Strength",
-                difficulty = "Beginner",
                 points = 12,
-                time = 30,
+                reps = 10,
                 calories = 100
             ),
             Exercise(
@@ -214,9 +211,8 @@ class Database(val context: Context, factory: CursorFactory?) :
                 description = "Plank is a core strength exercise that helps improve stability and endurance.",
                 image = "plank",
                 type = "Core",
-                difficulty = "Intermediate",
                 points = 15,
-                time = 45,
+                reps = 10,
                 calories = 100
             ),
             Exercise(
@@ -224,9 +220,8 @@ class Database(val context: Context, factory: CursorFactory?) :
                 description = "Lunges are great for building lower body strength and improving balance.",
                 image = "lunges",
                 type = "Strength",
-                difficulty = "Intermediate",
                 points = 20,
-                time = 45,
+                reps = 10,
                 calories = 100
             ),
             Exercise(
@@ -234,9 +229,8 @@ class Database(val context: Context, factory: CursorFactory?) :
                 description = "Burpees are a full-body exercise that improves cardio and strength simultaneously.",
                 image = "burpees",
                 type = "Cardio",
-                difficulty = "Advanced",
                 points = 25,
-                time = 60,
+                reps = 10,
                 calories = 100
             )
         )
@@ -260,10 +254,9 @@ class Database(val context: Context, factory: CursorFactory?) :
                     put("description", exercise.description)
                     put("image", exercise.image)
                     put("type", exercise.type)
-                    put("difficulty", exercise.difficulty)
                     put("points", exercise.points)
-                    put("time", exercise.time)
                     put("calories", exercise.calories)
+                    put("reps", exercise.reps)
                 }
 
                 dbWritable.insert("exercise", null, values)
@@ -285,10 +278,10 @@ class Database(val context: Context, factory: CursorFactory?) :
             while (cursor.moveToNext()) {
                 val difficulty = Difficulty(
                     name = cursor.getString(cursor.getColumnIndexOrThrow("name")),
+                    time = cursor.getInt(cursor.getColumnIndexOrThrow("time")),
                     repsMult = cursor.getFloat(cursor.getColumnIndexOrThrow("repsMult")),
                     pointsMult = cursor.getFloat(cursor.getColumnIndexOrThrow("pointsMult")),
-                    time = cursor.getInt(cursor.getColumnIndexOrThrow("time")),
-                    calories = cursor.getInt(cursor.getColumnIndexOrThrow("calories"))
+                    caloriesMult = cursor.getFloat(cursor.getColumnIndexOrThrow("caloriesMult"))
                 )
                 difficulties.add(difficulty)
             }
@@ -307,21 +300,21 @@ class Database(val context: Context, factory: CursorFactory?) :
                 repsMult = 1.0f,
                 pointsMult = 1.0f,
                 time = 30,
-                calories = 100
+                caloriesMult = 1f
             ),
             Difficulty(
                 name = "Intermediate",
                 repsMult = 1.5f,
                 pointsMult = 1.5f,
                 time = 45,
-                calories = 100
+                caloriesMult = 1.5f
             ),
             Difficulty(
                 name = "Advanced",
                 repsMult = 2.0f,
                 pointsMult = 2.0f,
                 time = 60,
-                calories = 100
+                caloriesMult = 2.0f
             )
         )
 
@@ -344,7 +337,7 @@ class Database(val context: Context, factory: CursorFactory?) :
                     put("repsMult", difficulty.repsMult)
                     put("pointsMult", difficulty.pointsMult)
                     put("time", difficulty.time)
-                    put("calories", difficulty.calories)
+                    put("caloriesMult", difficulty.caloriesMult)
                 }
 
                 dbWritable.insert("difficulty", null, values)

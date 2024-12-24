@@ -5,5 +5,5 @@ data class Difficulty (
     val time: Int,
     val repsMult: Float,
     val pointsMult: Float,
-    val calories: Int
+    val caloriesMult: Float
 )
