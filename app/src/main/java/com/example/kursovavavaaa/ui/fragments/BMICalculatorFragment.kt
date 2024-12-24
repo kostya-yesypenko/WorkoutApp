@@ -1,3 +1,4 @@
+
 package com.example.kursovavavaaa.ui.fragments
 
 import android.os.Bundle
@@ -7,14 +8,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.kursovavavaaa.R
+import com.example.kursovavavaaa.data.Database
 import com.example.kursovavavaaa.databinding.FragmentBmiCalculatorBinding
 
 class BMICalculatorFragment : Fragment() {
     private var _binding: FragmentBmiCalculatorBinding? = null
     private val binding get() = _binding!!
 
-    private val weight = 80f // Example weight in kg
-    private val height = 1.8f // Example height in meters
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,17 +27,38 @@ class BMICalculatorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bmi = calculateBMI(weight, height)
-        val category = getBMICategory(bmi)
-        val color = getCategoryColor(bmi)
+        // Initialize the database
+        val database = Database(requireContext(), null)
 
-        // Update BMIScaleView
-        binding.bmiScaleView.setBmiValue(bmi)
+        // Fetch user data from the database
+        val user = database.getUser()  // Assuming getUser() returns a user object with weight and height
+        if (user == null) {
+            binding.textViewBmiInfo.text = "User data not found. Please set up your profile."
+            return
+        }
 
-        // Update result text and set its color
-        binding.textViewBmiInfo.text = "Your BMI: $bmi\nCategory: $category"
-        binding.textViewBmiInfo.setTextColor(ContextCompat.getColor(requireContext(), color))
+        // Fetch weight and height from user data
+        val weight = user.weight
+        val height = user.height/100
+
+        // Check if the weight and height are valid (greater than 0)
+        if (weight > 0 && height > 0) {
+            // Calculate BMI
+            val bmi = calculateBMI(weight, height)
+            val category = getBMICategory(bmi)
+            val color = getCategoryColor(bmi)
+
+            // Update BMIScaleView
+            binding.bmiScaleView.setBmiValue(bmi)
+
+            // Update result text and set its color
+            binding.textViewBmiInfo.text = "Your BMI: $bmi\nCategory: $category"
+            binding.textViewBmiInfo.setTextColor(ContextCompat.getColor(requireContext(), color))
+        } else {
+            binding.textViewBmiInfo.text = "Please update your profile with valid weight and height."
+        }
     }
+
 
     private fun calculateBMI(weight: Float, height: Float): Float {
         return (weight / (height * height) * 10).toInt() / 10f // Rounded to one decimal
