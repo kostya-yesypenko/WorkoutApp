@@ -64,7 +64,7 @@
         android:textSize="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changeImageBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/pickImageBtn" />
 
     <LinearLayout
         android:id="@+id/userMetricsLayout"
