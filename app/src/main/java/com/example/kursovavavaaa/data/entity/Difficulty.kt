@@ -1,10 +1,9 @@
 package com.example.kursovavavaaa.data.entity
 
-data class Complexity (
-    val id: Int,
+data class Difficulty (
     val name: String,
-    val reps: Int,
     val time: Int,
-    val points: Int,
+    val repsMult: Float,
+    val pointsMult: Float,
     val calories: Int
 )
