@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#F8F9FA">
+    android:padding="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,37 +15,35 @@
             android:id="@+id/bmiContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
             android:elevation="4dp"
+            android:minHeight="200dp"
             android:padding="16dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="32dp" /> <!-- Increased margin -->
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" /> <!-- Increased margin -->
 
         <FrameLayout
             android:id="@+id/waterTrackerContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
             android:elevation="4dp"
+            android:minHeight="200dp"
             android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@id/bmiContainer"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="32dp" /> <!-- Increased margin -->
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bmiContainer" /> <!-- Increased margin -->
 
         <!-- Calorie Calculator Fragment -->
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/calorieCalculatorFragment"
             android:name="com.example.kursovavavaaa.ui.fragments.CalorieCalculatorFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
             android:elevation="4dp"
+            android:minHeight="500dp"
             android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@id/waterTrackerContainer"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/waterTrackerContainer" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
