@@ -7,6 +7,5 @@ data class User (
     val weight: Float,
     val gender: String,
     val age: Int,
-    val image: String,
     val statistics: Statistic? = null
 )

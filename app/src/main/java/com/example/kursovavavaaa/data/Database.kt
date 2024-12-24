@@ -95,7 +95,6 @@ class Database(val context: Context, factory: CursorFactory?) :
         values.put("weight", 0.0)
         values.put("gender", "Не вказано")
         values.put("age", 0)
-        values.put("image", "emptyuser")
 
         // Get the database
         val db = writableDatabase
@@ -153,7 +152,6 @@ class Database(val context: Context, factory: CursorFactory?) :
                     weight = cursor.getFloat(cursor.getColumnIndexOrThrow("weight")),
                     gender = cursor.getString(cursor.getColumnIndexOrThrow("gender")),
                     age = cursor.getInt(cursor.getColumnIndexOrThrow("age")),
-                    image = cursor.getString(cursor.getColumnIndexOrThrow("image"))
                 )
             }
         } finally {

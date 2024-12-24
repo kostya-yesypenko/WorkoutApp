@@ -86,7 +86,6 @@ class EditProfileFragment : Fragment() {
                 weight = weight,
                 gender = gender,
                 age = age,
-                image = "emptyuser"
             )
 
             // Update the user data in the database
@@ -115,8 +114,6 @@ class EditProfileFragment : Fragment() {
                 binding.weightEdit.setText(user.weight.toString())
                 binding.ageEdit.setText(user.age.toString())
 
-                // Установить изображение пользователя
-                setUserImage(user.image.toString())
 
                 // Set up the Spinner
                 val genderOptions = listOf("Не вказано", "Чоловік", "Жінка")
@@ -137,27 +134,6 @@ class EditProfileFragment : Fragment() {
         }
     }
 
-    private fun setUserImage(imageName: String?) {
-        try {
-            if (!imageName.isNullOrBlank()) {
-                // Найти идентификатор ресурса
-                val resourceId = resources.getIdentifier(imageName, "drawable", requireContext().packageName)
-                if (resourceId != 0) {
-                    // Установить изображение в ImageView
-                    binding.userImgContainer.findViewById<ImageView>(R.id.userImg).setImageResource(resourceId)
-                } else {
-                    // Установить изображение по умолчанию, если ресурс не найден
-                    binding.userImgContainer.findViewById<ImageView>(R.id.userImg).setImageResource(R.drawable.emptyuser)
-                }
-            } else {
-                // Установить изображение по умолчанию, если имя пустое
-                binding.userImgContainer.findViewById<ImageView>(R.id.userImg).setImageResource(R.drawable.emptyuser)
-            }
-        } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Ошибка загрузки изображения: ${e.message}", Toast.LENGTH_LONG).show()
-        }
-    }
-
     private fun resetUserData() {
         try {
             // Create a UserDbEntity object
@@ -168,7 +144,6 @@ class EditProfileFragment : Fragment() {
                 weight = 0.0f,
                 gender = "Не вказано",
                 age = 0,
-                image = "emptyuser"
             )
 
             // Update the user data in the database
