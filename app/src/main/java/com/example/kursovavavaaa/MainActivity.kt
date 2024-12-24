@@ -18,6 +18,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.ui.setupWithNavController
 import com.example.kursovavavaaa.data.Database
+import com.example.kursovavavaaa.data.entity.Exercise
 import com.example.kursovavavaaa.databinding.ActivityMainBinding
 import java.util.Calendar
 
@@ -65,6 +66,8 @@ class MainActivity : AppCompatActivity() {
         // Create user in database
         val db = Database(this, null)
         db.createUser()
+        db.createExercises()
+        db.createDifficulties()
 
     }
 

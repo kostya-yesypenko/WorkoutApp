@@ -5,20 +5,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kursovavavaaa.data.Database
+import com.example.kursovavavaaa.data.entity.Exercise
 import com.example.kursovavavaaa.databinding.ExerciseItemBinding
-import com.example.kursovavavaaa.ui.fragments.a
+//import com.example.kursovavavaaa.ui.fragments.a
 
 
-class ExerciseItemAdapter(private val navController: NavController) :
-    RecyclerView.Adapter<ExerciseItemAdapter.ExerciseItemHolder>() {
-
-    private val exerciseList = a()
+class ExerciseItemAdapter(
+    private val navController: NavController,
+    private val exerciseList: List<Exercise>
+) : RecyclerView.Adapter<ExerciseItemAdapter.ExerciseItemHolder>() {
 
     inner class ExerciseItemHolder(item: View) : RecyclerView.ViewHolder(item) {
         val binding = ExerciseItemBinding.bind(item)
 
-        fun bind(exerciseItem: ExerciseItem) {
-            binding.exerciseTitle.text = exerciseItem.title
+        fun bind(exerciseItem: Exercise) {
+            binding.exerciseTitle.text = exerciseItem.name
             binding.exerciseDescription.text = exerciseItem.description
             binding.button.setOnClickListener {
                 navController.navigate(R.id.action_exercisesFragment_to_excerciseDetailsFragment)
