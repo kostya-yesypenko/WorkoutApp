@@ -3,19 +3,23 @@ package com.example.kursovavavaaa.ui.fragments
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ProgressBar
+import android.widget.Spinner
 import android.widget.TextView
+import androidx.transition.Visibility
 import com.example.kursovavavaaa.databinding.FragmentExcerciseDetailsBinding
 
 class ExcerciseDetailsFragment : Fragment() {
 
     private val handler = Handler(Looper.getMainLooper())
     private var progress = 0
-    private val duration = 10000
     private var isRunning = false
 
     private var _binding: FragmentExcerciseDetailsBinding? = null
@@ -26,42 +30,82 @@ class ExcerciseDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //З якоїсь причини все ламається якщо тривалість більше 10 секунд
+        var duration = 7000//Має братись з бази
 
         _binding = FragmentExcerciseDetailsBinding.inflate(inflater, container, false)
 
         val progressBar = binding.progressBar
         val timeText = binding.timeText
-        timeText.text = calcTime(progress, progressBar.max)
+        timeText.text = calcTime(duration, progress, progressBar.max)
+
+
+        // Вибір складності вправи
+        val difficultySpinner: Spinner = binding.difficultyEdit
+        //Тут мають значення братись з бази
+        val difficultyOptions = listOf("Низька", "Середня", "Висока")
+
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, difficultyOptions)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        difficultySpinner.adapter = adapter
+        difficultySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = parent?.getItemAtPosition(position).toString()
+
+                //Дійсні значення беруться з бази даних
+                when (selectedItem) {
+                    "Низька" -> duration = 7000
+                    "Середня" -> duration = 10000
+                    "Висока" -> duration = 12000
+                }
+
+                timeText.text = calcTime(duration, progress, progressBar.max)
+
+                Log.println(Log.DEBUG, "AAA", "Selected item: $selectedItem")
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
 
         binding.button.setOnClickListener {
             if (isRunning) {
                 stopProgressBar()
             } else {
-                startProgressBar(progressBar, timeText)
+                startProgressBar(duration, progressBar, timeText)
             }
         }
 
         return binding.root
     }
 
-    private fun calcTime(progress: Int, maxProgress: Int): String {
+    private fun calcTime(duration: Int, progress: Int, maxProgress: Int): String {
         val remainingTime = duration - (progress * duration / maxProgress)
         val minutes = remainingTime / 1000 / 60
         val seconds = (remainingTime / 1000 % 60).toString().padStart(2, '0')
         return "$minutes:$seconds"
     }
 
-    private fun startProgressBar(progressBar: ProgressBar, timeText: TextView) {
+    private fun startProgressBar(duration: Int, progressBar: ProgressBar, timeText: TextView) {
         val interval = 100L
         val maxProgress = progressBar.max
 
         isRunning = true
         binding.button.text = "Зупинити"
 
+        binding.difficultyEditLayout.visibility = View.INVISIBLE
+
         handler.post(object : Runnable {
             override fun run() {
                 progress += (maxProgress * interval / duration).toInt()
-                timeText.text = calcTime(progress, maxProgress)
+                timeText.text = calcTime(duration, progress, maxProgress)
 
                 if (progress <= maxProgress) {
                     progressBar.progress = progress
