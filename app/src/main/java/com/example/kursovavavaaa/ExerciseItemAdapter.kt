@@ -22,6 +22,20 @@ class ExerciseItemAdapter(
         fun bind(exerciseItem: Exercise) {
             binding.exerciseTitle.text = exerciseItem.name
             binding.exerciseDescription.text = exerciseItem.description
+
+            val imageResourceId = itemView.context.resources.getIdentifier(
+                exerciseItem.image,
+                "drawable",
+                itemView.context.packageName
+            )
+
+            if (imageResourceId != 0) {
+                binding.exerciseImage.setImageResource(imageResourceId)
+            } else {
+
+                binding.exerciseImage.setImageResource(R.drawable.kaczok)
+            }
+
             binding.button.setOnClickListener {
                 navController.navigate(R.id.action_exercisesFragment_to_excerciseDetailsFragment)
             }

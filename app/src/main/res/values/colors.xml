@@ -7,5 +7,7 @@
     <color name="overweightColor">#FFF176</color>   <!-- Yellow -->
     <color name="obesityColor">#FF8A80</color>      <!-- Red -->
     <color name="lightGray">#F5F5F5</color> <!-- Light grey -->
+    <color name="backgroundColorLight">#F0F0F0</color>
+    <color name="backgroundColorDark">#2A2A2A</color>
 
 </resources>

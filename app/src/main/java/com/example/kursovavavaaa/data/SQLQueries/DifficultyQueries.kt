@@ -1,6 +1,6 @@
 package com.example.kursovavavaaa.data.SQLQueries
 
-class DifficultyQuiries {
+class DifficultyQueries {
     // Create the difficulty table query
     private val createDifficultyTableQuery = "CREATE TABLE difficulty (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
