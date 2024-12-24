@@ -1,13 +1,21 @@
 package com.example.kursovavavaaa.ui.fragments
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
+import com.example.kursovavavaaa.R
 import com.example.kursovavavaaa.data.Database
 import com.example.kursovavavaaa.data.entity.User
 import com.example.kursovavavaaa.databinding.FragmentEditProfileBinding
@@ -48,9 +56,11 @@ class EditProfileFragment : Fragment() {
             resetUserData()
         }
 
+
         // Return the root view
         return binding.root
     }
+
 
     // Destroy the binding when the fragment is destroyed
     override fun onDestroyView() {
@@ -104,6 +114,7 @@ class EditProfileFragment : Fragment() {
                 binding.weightEdit.setText(user.weight.toString())
                 binding.ageEdit.setText(user.age.toString())
 
+
                 // Set up the Spinner
                 val genderOptions = listOf("Не вказано", "Чоловік", "Жінка")
                 val defaultGender = user.gender.trim()
@@ -125,13 +136,6 @@ class EditProfileFragment : Fragment() {
 
     private fun resetUserData() {
         try {
-            // Get the input fields data
-            val height = _binding?.heightEdit?.text.toString().toFloatOrNull() ?: 0.0f
-            val weight = _binding?.weightEdit?.text.toString().toFloatOrNull() ?: 0.0f
-            val age = _binding?.ageEdit?.text.toString().toIntOrNull() ?: 0
-            val name = _binding?.nameEdit?.text.toString() ?: ""
-            val gender = _binding?.genderEdit?.selectedItem.toString()
-
             // Create a UserDbEntity object
             val user = User(
                 id =  1,

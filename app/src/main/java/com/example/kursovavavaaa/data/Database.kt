@@ -6,9 +6,11 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteDatabase.CursorFactory
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
-import com.example.kursovavavaaa.data.SQLQueries.DifficultyQuiries
+import com.example.kursovavavaaa.data.SQLQueries.BmiQueries
+import com.example.kursovavavaaa.data.SQLQueries.DifficultyQueries
 import com.example.kursovavavaaa.data.SQLQueries.ExerciseQueries
 import com.example.kursovavavaaa.data.SQLQueries.UsersQueries
+import com.example.kursovavavaaa.data.entity.BMI
 import com.example.kursovavavaaa.data.entity.Difficulty
 import com.example.kursovavavaaa.data.entity.Exercise
 import com.example.kursovavavaaa.data.entity.User
@@ -31,8 +33,12 @@ class Database(val context: Context, factory: CursorFactory?) :
         executeQuery(db, createExrciseTable)
 
         // Create difficulty table
-        val createDifficultyTable = DifficultyQuiries().getCreateDifficultyTableQuery()
+        val createDifficultyTable = DifficultyQueries().getCreateDifficultyTableQuery()
         executeQuery(db, createDifficultyTable)
+
+        // Create the BMI table
+        val createBmiTable = BmiQueries().getCreateBmiTableQuery()
+        executeQuery(db, createBmiTable)
 
     }
 
@@ -47,7 +53,7 @@ class Database(val context: Context, factory: CursorFactory?) :
         executeQuery(db, deleteExerciseTable)
 
         // Delete the difficulty table
-        val deleteDifficultyTable = DifficultyQuiries().getDeleteDifficultyTableQuery()
+        val deleteDifficultyTable = DifficultyQueries().getDeleteDifficultyTableQuery()
         executeQuery(db, deleteDifficultyTable)
 
     }
@@ -145,7 +151,7 @@ class Database(val context: Context, factory: CursorFactory?) :
                     height = cursor.getFloat(cursor.getColumnIndexOrThrow("height")),
                     weight = cursor.getFloat(cursor.getColumnIndexOrThrow("weight")),
                     gender = cursor.getString(cursor.getColumnIndexOrThrow("gender")),
-                    age = cursor.getInt(cursor.getColumnIndexOrThrow("age"))
+                    age = cursor.getInt(cursor.getColumnIndexOrThrow("age")),
                 )
             }
         } finally {
@@ -157,16 +163,42 @@ class Database(val context: Context, factory: CursorFactory?) :
         return user
     }
 
+    // Get exercise by id
+    fun getExerciseById(id: Int): Exercise {
+        val query = "SELECT * FROM exercise WHERE id = ?"
+        val db = readableDatabase
+        val cursor = db.rawQuery(query, arrayOf(id.toString()))
+
+        cursor.moveToFirst()
+
+        return Exercise(
+            name = cursor.getString(cursor.getColumnIndexOrThrow("name")),
+            description = cursor.getString(cursor.getColumnIndexOrThrow("description")),
+            image = cursor.getString(cursor.getColumnIndexOrThrow("image")),
+            type = cursor.getString(cursor.getColumnIndexOrThrow("type")),
+            points = cursor.getInt(cursor.getColumnIndexOrThrow("points")),
+            reps = cursor.getInt(cursor.getColumnIndexOrThrow("reps")),
+            calories = cursor.getInt(cursor.getColumnIndexOrThrow("calories"))
+        )
+    }
+
     // Get the exercise list
     fun getExerciseList(): List<Exercise> {
+        // Define the query
         val query = "SELECT * FROM exercise"
+        // Get the database
         val db = readableDatabase
+        // Initialize the list
         val exercises = mutableListOf<Exercise>()
 
+        // Get the cursor and handle it
         val cursor = db.rawQuery(query, null)
 
+        // Try to get the data
         try {
+            // Loop through the cursor
             while (cursor.moveToNext()) {
+                // Get the exercise
                 val exercise = Exercise(
                     name = cursor.getString(cursor.getColumnIndexOrThrow("name")),
                     description = cursor.getString(cursor.getColumnIndexOrThrow("description")),
@@ -176,17 +208,21 @@ class Database(val context: Context, factory: CursorFactory?) :
                     reps = cursor.getInt(cursor.getColumnIndexOrThrow("reps")),
                     calories = cursor.getInt(cursor.getColumnIndexOrThrow("calories"))
                 )
+                // Add the exercise to the list
                 exercises.add(exercise)
             }
         } finally {
+            // Close the cursor
             cursor.close()
         }
 
+        // Return the list of exercises
         return exercises
     }
 
     // Create the exercises
     fun createExercises() {
+        // Define the exercises
         val exercises = listOf(
             Exercise(
                 name = "Push-ups",
@@ -225,30 +261,36 @@ class Database(val context: Context, factory: CursorFactory?) :
                 calories = 100
             ),
             Exercise(
-                name = "Burpees",
-                description = "Burpees are a full-body exercise that improves cardio and strength simultaneously.",
-                image = "burpees",
-                type = "Cardio",
+                name = "Pull-ups",
+                description = "Pull-ups are a great exercise for your back and biceps. They can be done with a pull-up bar.",
+                image = "pullups",
+                type = "Strength",
                 points = 25,
                 reps = 10,
                 calories = 100
             )
         )
 
+        // Get the database
         val dbWritable = writableDatabase
 
+        // Try to create the exercises
         try {
+            // Loop through the exercises
             exercises.forEach { exercise ->
                 // Check if exercise with the same name exists
                 val query = "SELECT * FROM exercise WHERE name = ?"
                 val cursor = dbWritable.rawQuery(query, arrayOf(exercise.name))
 
+                // If exercise exists, return
                 if (cursor.moveToFirst()) {
                     cursor.close()
                     return@forEach
                 }
+                // Close the cursor
                 cursor.close()
 
+                // Define the values
                 val values = ContentValues().apply {
                     put("name", exercise.name)
                     put("description", exercise.description)
@@ -259,23 +301,32 @@ class Database(val context: Context, factory: CursorFactory?) :
                     put("reps", exercise.reps)
                 }
 
+                // Insert the values
                 dbWritable.insert("exercise", null, values)
             }
         } catch (e: Exception) {
+            // Show error message
             Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
         }
     }
 
     // Get the difficulty list
     fun getDifficultyList(): List<Difficulty> {
+        // Define the query
         val query = "SELECT * FROM difficulty"
+        // Get the database
         val db = readableDatabase
+        // Initialize the list
         val difficulties = mutableListOf<Difficulty>()
 
+        // Get the cursor and handle it
         val cursor = db.rawQuery(query, null)
 
+        // Try to get the data
         try {
+            // Loop through the cursor
             while (cursor.moveToNext()) {
+                // Get the difficulty
                 val difficulty = Difficulty(
                     name = cursor.getString(cursor.getColumnIndexOrThrow("name")),
                     time = cursor.getInt(cursor.getColumnIndexOrThrow("time")),
@@ -283,17 +334,21 @@ class Database(val context: Context, factory: CursorFactory?) :
                     pointsMult = cursor.getFloat(cursor.getColumnIndexOrThrow("pointsMult")),
                     caloriesMult = cursor.getFloat(cursor.getColumnIndexOrThrow("caloriesMult"))
                 )
+                // Add the difficulty to the list
                 difficulties.add(difficulty)
             }
         } finally {
+            // Close the cursor
             cursor.close()
         }
 
+        // Return the list of difficulties
         return difficulties
     }
 
     // Create the difficulties
     fun createDifficulties() {
+        // Define the difficulties
         val difficulties = listOf(
             Difficulty(
                 name = "Beginner",
@@ -318,20 +373,29 @@ class Database(val context: Context, factory: CursorFactory?) :
             )
         )
 
+        // Get the database
         val dbWritable = writableDatabase
 
+
+        // Try to create the difficulties
         try {
+            // Loop through the difficulties
             difficulties.forEach { difficulty ->
                 // Check if difficulty with the same name exists
                 val query = "SELECT * FROM difficulty WHERE name = ?"
+                // Get the cursor
                 val cursor = dbWritable.rawQuery(query, arrayOf(difficulty.name))
 
+                // If difficulty exists, return
                 if (cursor.moveToFirst()) {
+                    // Close the cursor
                     cursor.close()
                     return@forEach
                 }
+                // Close the cursor
                 cursor.close()
 
+                // Define the values
                 val values = ContentValues().apply {
                     put("name", difficulty.name)
                     put("repsMult", difficulty.repsMult)
@@ -339,11 +403,60 @@ class Database(val context: Context, factory: CursorFactory?) :
                     put("time", difficulty.time)
                     put("caloriesMult", difficulty.caloriesMult)
                 }
-
+                // Insert the values
                 dbWritable.insert("difficulty", null, values)
             }
         } catch (e: Exception) {
+            // Show error message
             Toast.makeText(context, "Error $e.message", Toast.LENGTH_LONG).show()
         }
+    }
+
+    // Create the BMI
+    fun createBmi(value: Float, date: String) {
+        // Define the values
+        val values = ContentValues().apply {
+            put("value", value)
+            put("date", date)
+        }
+
+        // Get the database
+        val db = writableDatabase
+        // Insert the values
+        db.insert("bmi", null, values)
+    }
+
+    // Get the BMI list
+    fun getBmiList(): List<BMI> {
+        // Define the query
+        val query = "SELECT * FROM bmi"
+        // Get the database
+        val db = readableDatabase
+        // Initialize the list
+        val bmiList = mutableListOf<BMI>()
+
+        // Get the cursor and handle it
+        val cursor = db.rawQuery(query, null)
+
+        // Try to get the data
+        try {
+            // Loop through the cursor
+            while (cursor.moveToNext()) {
+                // Get the BMI
+                val bmi = BMI(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    value = cursor.getFloat(cursor.getColumnIndexOrThrow("value")),
+                    date = cursor.getString(cursor.getColumnIndexOrThrow("date"))
+                )
+                // Add the BMI to the list
+                bmiList.add(bmi)
+            }
+        } finally {
+            // Close the cursor
+            cursor.close()
+        }
+
+        // Return the list of BMI
+        return bmiList
     }
 }

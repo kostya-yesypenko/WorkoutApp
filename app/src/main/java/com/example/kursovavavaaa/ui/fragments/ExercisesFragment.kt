@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kursovavavaaa.ExerciseItem
 import com.example.kursovavavaaa.ExerciseItemAdapter
 import com.example.kursovavavaaa.data.Database
 import com.example.kursovavavaaa.data.entity.Exercise
