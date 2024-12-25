@@ -1,5 +1,6 @@
 package com.example.kursovavavaaa.ui.fragments
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.kursovavavaaa.R
 import com.example.kursovavavaaa.data.Database
 import com.example.kursovavavaaa.databinding.FragmentUserBinding
+import java.io.File
 
 class UserFragment : Fragment() {
     private var _binding: FragmentUserBinding? = null
@@ -51,6 +53,18 @@ class UserFragment : Fragment() {
                 binding.weightText.text = user.weight.toString()
                 binding.ageText.text = user.age.toString()
                 binding.genderText.text = user.gender.toString()
+
+                // If user has an image, set it
+                if (user.image != "emptyuser") {
+                    // Set the image
+                    val file = File(user.image)
+
+                    // If the file exists, set the image
+                    if (file.exists()) {
+                        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                        binding.userImg.setImageBitmap(bitmap)
+                    }
+                }
             }
         } catch (e: Exception) {
             // Show error message
