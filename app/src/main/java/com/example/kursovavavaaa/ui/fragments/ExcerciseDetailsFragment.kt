@@ -19,7 +19,7 @@ import com.example.kursovavavaaa.databinding.FragmentExcerciseDetailsBinding
 class ExcerciseDetailsFragment : Fragment() {
 
     private val handler = Handler(Looper.getMainLooper())
-    private var progress = 0
+    private var progress = 0.0
     private var isRunning = false
 
     private var _binding: FragmentExcerciseDetailsBinding? = null
@@ -30,7 +30,6 @@ class ExcerciseDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //З якоїсь причини все ламається якщо тривалість більше 10 секунд
         var duration = 7000//Має братись з бази
 
         _binding = FragmentExcerciseDetailsBinding.inflate(inflater, container, false)
@@ -86,10 +85,10 @@ class ExcerciseDetailsFragment : Fragment() {
         return binding.root
     }
 
-    private fun calcTime(duration: Int, progress: Int, maxProgress: Int): String {
+    private fun calcTime(duration: Int, progress: Double, maxProgress: Int): String {
         val remainingTime = duration - (progress * duration / maxProgress)
-        val minutes = remainingTime / 1000 / 60
-        val seconds = (remainingTime / 1000 % 60).toString().padStart(2, '0')
+        val minutes = (remainingTime / 1000 / 60).toInt()
+        val seconds = ((remainingTime / 1000 % 60).toInt()).toString().padStart(2, '0')
         return "$minutes:$seconds"
     }
 
@@ -102,13 +101,25 @@ class ExcerciseDetailsFragment : Fragment() {
 
         binding.difficultyEditLayout.visibility = View.INVISIBLE
 
+
         handler.post(object : Runnable {
             override fun run() {
-                progress += (maxProgress * interval / duration).toInt()
-                timeText.text = calcTime(duration, progress, maxProgress)
+                if (progress < maxProgress) {
+                    Log.d(
+                        "ProgressBar",
+                        "Progress: $progress, Time Left: ${
+                            calcTime(
+                                duration,
+                                progress,
+                                progressBar.max
+                            )
+                        }, riznycia ${(maxProgress.toFloat() * interval / duration).toInt()}"
+                    )
+                    val change =(maxProgress.toFloat() * interval / duration)
+                    progress += change
+                    timeText.text = calcTime(duration, progress, maxProgress)
+                    progressBar.progress = progress.toInt()
 
-                if (progress <= maxProgress) {
-                    progressBar.progress = progress
                     handler.postDelayed(this, interval)
                 } else {
                     progressBar.progress = maxProgress
@@ -117,6 +128,7 @@ class ExcerciseDetailsFragment : Fragment() {
             }
         })
     }
+
 
     private fun finishProgressBar() {
         binding.button.visibility = View.INVISIBLE
