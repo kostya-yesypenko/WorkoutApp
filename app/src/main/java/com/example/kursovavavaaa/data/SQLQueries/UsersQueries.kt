@@ -9,7 +9,8 @@ class UsersQueries {
             "height REAL," +
             "weight REAL," +
             "gender TEXT," +
-            "age INT" +
+            "age INT," +
+            "image TEXT" +
             ");"
 
     // Return the create user query
