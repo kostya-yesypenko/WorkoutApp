@@ -59,7 +59,7 @@ class BMIScaleView(context: Context, attrs: AttributeSet) : View(context, attrs)
 
         val width = width.toFloat()
         val height = height.toFloat()
-        val scaleHeight = height * 0.5f // Scale height is 50% of view height
+        val scaleHeight = height * 1f   // Scale height is 50% of view height
         val scaleWidth = width * 0.8f   // Scale width is 80% of the view width
         val scaleStart = width * 0.1f   // Start of the scale is at 10% of the view width
 

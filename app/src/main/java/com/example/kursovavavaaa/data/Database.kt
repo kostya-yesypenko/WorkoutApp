@@ -225,8 +225,8 @@ class Database(val context: Context, factory: CursorFactory?) :
         // Define the exercises
         val exercises = listOf(
             Exercise(
-                name = "Push-ups",
-                description = "Push-ups are a great exercise for your chest, shoulders, and triceps. They can be done anywhere and require no equipment.",
+                name = "Віджимання",
+                description = "Віджимання — чудова вправа для грудей, плечей і трицепсів. Їх можна робити де завгодно і не потребує обладнання.",
                 image = "pushups",
                 type = "Strength",
                 calories = 100,
@@ -234,8 +234,8 @@ class Database(val context: Context, factory: CursorFactory?) :
                 points = 10,
             ),
             Exercise(
-                name = "Squats",
-                description = "Squats help strengthen your legs and glutes. They are essential for lower body strength and stability.",
+                name = "Присідання",
+                description = "Присідання допомагають зміцнити ноги та сідниці. Вони необхідні для міцності та стабільності нижньої частини тіла.",
                 image = "squats",
                 type = "Strength",
                 points = 12,
@@ -243,8 +243,8 @@ class Database(val context: Context, factory: CursorFactory?) :
                 calories = 100
             ),
             Exercise(
-                name = "Plank",
-                description = "Plank is a core strength exercise that helps improve stability and endurance.",
+                name = "Планка",
+                description = "Планка – це основна силова вправа, яка допомагає підвищити стабільність і витривалість.",
                 image = "plank",
                 type = "Core",
                 points = 15,
@@ -252,8 +252,8 @@ class Database(val context: Context, factory: CursorFactory?) :
                 calories = 100
             ),
             Exercise(
-                name = "Lunges",
-                description = "Lunges are great for building lower body strength and improving balance.",
+                name = "Випади",
+                description = "Випади чудово підходять для розвитку сили нижньої частини тіла та покращення рівноваги.",
                 image = "lunges",
                 type = "Strength",
                 points = 20,
@@ -261,8 +261,8 @@ class Database(val context: Context, factory: CursorFactory?) :
                 calories = 100
             ),
             Exercise(
-                name = "Pull-ups",
-                description = "Pull-ups are a great exercise for your back and biceps. They can be done with a pull-up bar.",
+                name = "Підтягування",
+                description = "Підтягування - чудова вправа для спини і біцепсів. Їх можна виконувати з підтягуванням.",
                 image = "pullups",
                 type = "Strength",
                 points = 25,
