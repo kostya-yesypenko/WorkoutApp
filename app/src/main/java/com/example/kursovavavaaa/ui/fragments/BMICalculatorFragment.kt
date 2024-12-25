@@ -33,7 +33,7 @@ class BMICalculatorFragment : Fragment() {
         // Fetch user data from the database
         val user = database.getUser()  // Assuming getUser() returns a user object with weight and height
         if (user == null) {
-            binding.textViewBmiInfo.text = "User data not found. Please set up your profile."
+            binding.textViewBmiInfo.text = "Не знайдено даних. Будь-ласка заповніть свій запис."
             return
         }
 
@@ -52,10 +52,10 @@ class BMICalculatorFragment : Fragment() {
             binding.bmiScaleView.setBmiValue(bmi)
 
             // Update result text and set its color
-            binding.textViewBmiInfo.text = "Your BMI: $bmi\nCategory: $category"
+            binding.textViewBmiInfo.text = "Ваш показник: $bmi\nКатегорія: $category"
             binding.textViewBmiInfo.setTextColor(ContextCompat.getColor(requireContext(), color))
         } else {
-            binding.textViewBmiInfo.text = "Please update your profile with valid weight and height."
+            binding.textViewBmiInfo.text = "Будь-ласка вкажіть ваші зріст і вагу у обліковому записі."
         }
     }
 
@@ -66,10 +66,10 @@ class BMICalculatorFragment : Fragment() {
 
     private fun getBMICategory(bmi: Float): String {
         return when {
-            bmi < 18.5 -> "Underweight"
-            bmi in 18.5..24.9 -> "Normal weight"
-            bmi in 25.0..29.9 -> "Overweight"
-            else -> "Obesity"
+            bmi < 18.5 -> "Недостача"
+            bmi in 18.5..24.9 -> "Нормальна вага"
+            bmi in 25.0..29.9 -> "Зайва вага"
+            else -> "Ожиріння"
         }
     }
 

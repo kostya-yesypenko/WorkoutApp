@@ -22,7 +22,7 @@
         android:id="@+id/textViewWaterProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0 / 2000 ml"
+        android:text="0 / 2000 мл"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/imageViewWaterIcon"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,13 +58,13 @@
             android:id="@+id/buttonAddWater"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+250 ml" />
+            android:text="+250 мл" />
 
         <Button
             android:id="@+id/buttonReset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reset"
+            android:text="Скинути"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp" />
 
@@ -72,7 +72,7 @@
             android:id="@+id/buttonSetTarget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Set Target" />
+            android:text="Встановити мету" />
     </LinearLayout>
 
     <!-- Hidden Input Field and Apply Button -->
@@ -80,7 +80,7 @@
         android:id="@+id/editTextNewTarget"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Enter new target (ml)"
+        android:hint="Введіть нову мету (мл)"
         android:inputType="number"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/buttonRow"
@@ -92,7 +92,7 @@
         android:id="@+id/buttonApplyNewTarget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Apply"
+        android:text="Готово"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/editTextNewTarget"
         app:layout_constraintStart_toStartOf="parent"

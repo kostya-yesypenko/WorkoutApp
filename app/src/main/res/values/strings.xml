@@ -10,22 +10,17 @@
     <string name="user_fragment_label">Користувач</string>
     <string name="next">Далі</string>
     <string name="previous">Назад</string>
-    <string name="water_icon">Water tracking icon</string>
+    <string name="water_icon">Значок стеження за водою</string>
 
-    <string name="text_1">
-        11111
-    </string>
-    <string name="text_2">
-        22222
-    </string>
+
     <string name="hello_blank_fragment">3</string>
 
     <string-array name="activity_levels">
-        <item>Sedentary</item>
-        <item>Light activity</item>
-        <item>Moderate activity</item>
-        <item>Very active</item>
-        <item>Extra active</item>
+        <item>Сидячий</item>
+        <item>Мале навантаження</item>
+        <item>Помірне навантаження</item>
+        <item>Сильне навантаження</item>
+        <item>Дуже сильне навантаження</item>
     </string-array>
 
     <string-array name="gender_options">

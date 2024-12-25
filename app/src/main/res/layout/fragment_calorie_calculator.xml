@@ -13,7 +13,7 @@
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calorie Calculator"
+            android:text="Калькулятор калорій"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal" />
@@ -22,21 +22,21 @@
             android:id="@+id/editTextWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Weight (kg)"
+            android:hint="Вага (кг)"
             android:inputType="numberDecimal" />
 
         <EditText
             android:id="@+id/editTextHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Height (cm)"
+            android:hint="Зріст (см)"
             android:inputType="numberDecimal" />
 
         <EditText
             android:id="@+id/editTextAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Age"
+            android:hint="Вік"
             android:inputType="number" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
-            android:text="Select your lifestyle:"
+            android:text="Оберіть свій спосіб життя:"
             android:textSize="16sp" />
 
         <LinearLayout
@@ -61,31 +61,31 @@
                     android:id="@+id/radioButtonSedentary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sedentary (little or no exercise)" />
+                    android:text="Сидячий (майже нема навантаження)" />
 
                 <RadioButton
                     android:id="@+id/radioButtonLightlyActive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lightly active (light exercise/sports 1-3 days a week)" />
+                    android:text="Ледь рухомий (вправи 1 - 3 рази на тиждень)" />
 
                 <RadioButton
                     android:id="@+id/radioButtonModeratelyActive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Moderately active (moderate exercise/sports 3-5 days a week)" />
+                    android:text="Помірно рухомий (вправи 3 - 5 разів на тиждень)" />
 
                 <RadioButton
                     android:id="@+id/radioButtonVeryActive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Very active (hard exercise/sports 6-7 days a week)" />
+                    android:text="Сильно рухомий (вправи 6 - 7 разів на тиждень)" />
 
                 <RadioButton
                     android:id="@+id/radioButtonExtraActive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Extra active (very hard exercise or physical job)" />
+                    android:text="Дуже рухомий (тяжкі вправи або тяжка тілесна робота)" />
             </RadioGroup>
         </LinearLayout>
 
@@ -93,7 +93,7 @@
             android:id="@+id/buttonCalculateCalories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Calculate"
+            android:text="Порахувати"
             android:layout_marginTop="16dp" />
 
         <TextView

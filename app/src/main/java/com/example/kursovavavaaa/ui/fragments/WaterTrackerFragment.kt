@@ -81,7 +81,7 @@ class WaterTrackerFragment : Fragment() {
     }
 
     private fun updateProgress() {
-        binding.textViewWaterProgress.text = "$currentWater / $targetWater ml"
+        binding.textViewWaterProgress.text = "$currentWater / $targetWater мл"
         binding.progressBarWater.progress = (currentWater * 100 / targetWater)
     }
 
@@ -92,7 +92,7 @@ class WaterTrackerFragment : Fragment() {
 
     private fun showTargetReachedToast() {
         // Show a Toast message when the target is reached
-        Toast.makeText(requireContext(), "Congratulations! You've reached your water consumption target!", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), "Вітаємо! Ви досягнули мети по споживанню води!", Toast.LENGTH_LONG).show()
     }
 
     private fun saveConsumption() {

@@ -52,14 +52,14 @@ class CalorieCalculatorFragment : Fragment() {
             val weightGainCalories = maintenanceCalories + 500
 
             binding.textViewResults.text = """
-                Maintenance: ${maintenanceCalories.toInt()} kcal/day
-                Weight Loss: ${weightLossCalories.toInt()} kcal/day
-                Weight Gain: ${weightGainCalories.toInt()} kcal/day
+                Підтримка: ${maintenanceCalories.toInt()} ккал/д.
+                Схудення: ${weightLossCalories.toInt()} ккал/д.
+                Набір: ${weightGainCalories.toInt()} ккал/д.
             """.trimIndent()
 
             binding.textViewResults.visibility = View.VISIBLE
         } else {
-            binding.textViewResults.text = "Please fill in all fields."
+            binding.textViewResults.text = "Заповніть усі поля."
             binding.textViewResults.visibility = View.VISIBLE
         }
     }
