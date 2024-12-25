@@ -4,20 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_marginBottom="30dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
         <!-- BMI Calculator Container -->
         <FrameLayout
             android:id="@+id/bmiContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:elevation="4dp"
             android:minHeight="200dp"
             android:padding="16dp"
+            android:background="@drawable/rounded_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" /> <!-- Increased margin -->
@@ -26,24 +27,26 @@
             android:id="@+id/waterTrackerContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:elevation="4dp"
             android:minHeight="200dp"
             android:padding="16dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bmiContainer" /> <!-- Increased margin -->
+            app:layout_constraintTop_toBottomOf="@id/bmiContainer"
+            android:background="@drawable/rounded_background"/> <!-- Increased margin -->
 
         <!-- Calorie Calculator Fragment -->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/calorieCalculatorFragment"
+            android:layout_marginTop="20dp"
             android:name="com.example.kursovavavaaa.ui.fragments.CalorieCalculatorFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="4dp"
             android:minHeight="500dp"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/rounded_background"
             app:layout_constraintTop_toBottomOf="@id/waterTrackerContainer" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
