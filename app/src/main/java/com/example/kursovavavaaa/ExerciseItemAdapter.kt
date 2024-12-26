@@ -1,5 +1,6 @@
 package com.example.kursovavavaaa
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,8 +37,12 @@ class ExerciseItemAdapter(
                 binding.exerciseImage.setImageResource(R.drawable.kaczok)
             }
 
+            val bundle = Bundle().apply {
+                putString("exerciseName", exerciseItem.name.toString())
+            }
+
             binding.button.setOnClickListener {
-                navController.navigate(R.id.action_exercisesFragment_to_excerciseDetailsFragment)
+                navController.navigate(R.id.action_exercisesFragment_to_excerciseDetailsFragment, bundle)
             }
         }
     }

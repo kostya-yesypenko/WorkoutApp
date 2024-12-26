@@ -9,5 +9,9 @@
     <color name="lightGray">#F5F5F5</color> <!-- Light grey -->
     <color name="backgroundColorLight">#F0F0F0</color>
     <color name="backgroundColorDark">#2A2A2A</color>
+    <color name="buttonColorLight">#6750a4</color>
+    <color name="buttonColorDark">#d0bcff</color>
+    <color name="porgressColorLight">#44346A</color>
+    <color name="porgressColorDark">#433368</color>
 
 </resources>

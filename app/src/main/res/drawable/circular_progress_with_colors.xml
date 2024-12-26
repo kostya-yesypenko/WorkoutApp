@@ -1,0 +1,22 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Фон прогресс-бара -->
+    <item android:id="@android:id/background">
+        <shape>
+            <solid android:color="?attr/buttonColor" />
+            <corners android:radius="150dp" />
+        </shape>
+    </item>
+
+    <!-- Цветной прогресс -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <corners android:radius="150dp" />
+                <stroke
+                    android:width="10dp"
+                    android:color="?attr/progressColor" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

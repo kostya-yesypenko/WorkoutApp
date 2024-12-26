@@ -1,5 +1,6 @@
 package com.example.kursovavavaaa.ui.fragments
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,41 +14,73 @@ import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.transition.Visibility
+import com.example.kursovavavaaa.R
+import com.example.kursovavavaaa.data.Database
+import com.example.kursovavavaaa.data.entity.Difficulty
+import com.example.kursovavavaaa.data.entity.Exercise
 import com.example.kursovavavaaa.databinding.FragmentExcerciseDetailsBinding
+import java.io.File
 
 class ExcerciseDetailsFragment : Fragment() {
-
     private val handler = Handler(Looper.getMainLooper())
     private var progress = 0.0
     private var isRunning = false
+
+    // Duration of exercise in milliseconds
+    private var duration = 7000
 
     private var _binding: FragmentExcerciseDetailsBinding? = null
 
     private val binding get() = _binding!!
 
+    // Exercise data
+    private var exercise: Exercise? = null
+    // Difficulty data
+    private var difficultys: List<Difficulty>? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var duration = 7000//Має братись з бази
-
         _binding = FragmentExcerciseDetailsBinding.inflate(inflater, container, false)
 
+        // Get exercise name from arguments
+        val exerciseName = arguments?.getString("exerciseName")
+        // Get exercise data from database with exercise name and difficultys
+        getExerciseAndDifficultysData(exerciseName!!)
+
+
+        val imageResourceId = resources.getIdentifier(exercise?.image, "drawable", context?.packageName)
+        if (imageResourceId != 0) {
+            binding.exerciseImage.setImageResource(imageResourceId)
+        } else {
+            binding.exerciseImage.setImageResource(R.drawable.kaczok)
+        }
+
+
+
         val progressBar = binding.progressBar
-        val timeText = binding.timeText
+        val timeText = binding.button
         timeText.text = calcTime(duration, progress, progressBar.max)
 
-
-        // Вибір складності вправи
+        // Get difficulty spinner
         val difficultySpinner: Spinner = binding.difficultyEdit
-        //Тут мають значення братись з бази
-        val difficultyOptions = listOf("Низька", "Середня", "Висока")
+
+        // Difficulty options
+        val difficultyOptions = listOf(
+            difficultys?.get(0)?.name.toString(),
+            difficultys?.get(1)?.name.toString(),
+            difficultys?.get(2)?.name.toString()
+        )
 
         val adapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, difficultyOptions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
         difficultySpinner.adapter = adapter
+
         difficultySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -59,9 +92,9 @@ class ExcerciseDetailsFragment : Fragment() {
 
                 //Дійсні значення беруться з бази даних
                 when (selectedItem) {
-                    "Низька" -> duration = 7000
-                    "Середня" -> duration = 10000
-                    "Висока" -> duration = 12000
+                    "Початковий" -> duration = difficultys?.get(0)?.time!! * 1000
+                    "Середній" -> duration = difficultys?.get(1)?.time!! * 1000
+                    "Складний" -> duration = difficultys?.get(2)?.time!! * 1000
                 }
 
                 timeText.text = calcTime(duration, progress, progressBar.max)
@@ -74,6 +107,7 @@ class ExcerciseDetailsFragment : Fragment() {
             }
         }
 
+
         binding.button.setOnClickListener {
             if (isRunning) {
                 stopProgressBar()
@@ -82,13 +116,28 @@ class ExcerciseDetailsFragment : Fragment() {
             }
         }
 
+
+
         return binding.root
     }
+
+    // Get exercise data from database
+    private fun getExerciseAndDifficultysData(exerciseName: String) {
+        // Get exercise data from database
+        val db = Database(requireContext(), null)
+        exercise = db.getExerciseByName(exerciseName)
+
+        difficultys = db.getDifficultyList()
+    }
+
 
     private fun calcTime(duration: Int, progress: Double, maxProgress: Int): String {
         val remainingTime = duration - (progress * duration / maxProgress)
         val minutes = (remainingTime / 1000 / 60).toInt()
         val seconds = ((remainingTime / 1000 % 60).toInt()).toString().padStart(2, '0')
+        if (minutes == 0 && seconds == "00") {
+            "Закінчено"
+        }
         return "$minutes:$seconds"
     }
 
@@ -98,8 +147,6 @@ class ExcerciseDetailsFragment : Fragment() {
 
         isRunning = true
         binding.button.text = "Зупинити"
-
-        binding.difficultyEditLayout.visibility = View.INVISIBLE
 
 
         handler.post(object : Runnable {
@@ -123,17 +170,10 @@ class ExcerciseDetailsFragment : Fragment() {
                     handler.postDelayed(this, interval)
                 } else {
                     progressBar.progress = maxProgress
-                    finishProgressBar()
+                    timeText.text = "Закінчено"
                 }
             }
         })
-    }
-
-
-    private fun finishProgressBar() {
-        binding.button.visibility = View.INVISIBLE
-        isRunning = false
-        handler.removeCallbacksAndMessages(null)
     }
 
     private fun stopProgressBar() {

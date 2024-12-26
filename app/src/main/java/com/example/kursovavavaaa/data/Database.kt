@@ -167,10 +167,10 @@ class Database(val context: Context, factory: CursorFactory?) :
     }
 
     // Get exercise by id
-    fun getExerciseById(id: Int): Exercise {
-        val query = "SELECT * FROM exercise WHERE id = ?"
+    fun getExerciseByName(name: String): Exercise {
+        val query = "SELECT * FROM exercise WHERE name = ?"
         val db = readableDatabase
-        val cursor = db.rawQuery(query, arrayOf(id.toString()))
+        val cursor = db.rawQuery(query, arrayOf(name.toString()))
 
         cursor.moveToFirst()
 
@@ -354,21 +354,21 @@ class Database(val context: Context, factory: CursorFactory?) :
         // Define the difficulties
         val difficulties = listOf(
             Difficulty(
-                name = "Beginner",
+                name = "Початковий",
                 repsMult = 1.0f,
                 pointsMult = 1.0f,
                 time = 30,
                 caloriesMult = 1f
             ),
             Difficulty(
-                name = "Intermediate",
+                name = "Середній",
                 repsMult = 1.5f,
                 pointsMult = 1.5f,
                 time = 45,
                 caloriesMult = 1.5f
             ),
             Difficulty(
-                name = "Advanced",
+                name = "Складний",
                 repsMult = 2.0f,
                 pointsMult = 2.0f,
                 time = 60,
