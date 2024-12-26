@@ -1,6 +1,7 @@
 package com.example.kursovavavaaa.ui.fragments
 
 import android.content.Context
+import android.graphics.Canvas
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

@@ -47,9 +47,9 @@ class ExcerciseDetailsFragment : Fragment() {
         _binding = FragmentExcerciseDetailsBinding.inflate(inflater, container, false)
 
         // Get exercise name from arguments
-        val exerciseName = arguments?.getString("exerciseName")
+        val exerciseId = arguments?.getInt("id")
         // Get exercise data from database with exercise name and difficultys
-        getExerciseAndDifficultysData(exerciseName!!)
+        getExerciseAndDifficultysData(exerciseId!!)
 
 
         val imageResourceId = resources.getIdentifier(exercise?.image, "drawable", context?.packageName)
@@ -59,6 +59,7 @@ class ExcerciseDetailsFragment : Fragment() {
             binding.exerciseImage.setImageResource(R.drawable.kaczok)
         }
 
+        binding.exerciseName.text = exercise?.name
 
 
         val progressBar = binding.progressBar
@@ -122,10 +123,10 @@ class ExcerciseDetailsFragment : Fragment() {
     }
 
     // Get exercise data from database
-    private fun getExerciseAndDifficultysData(exerciseName: String) {
+    private fun getExerciseAndDifficultysData(exerciseId: Int) {
         // Get exercise data from database
         val db = Database(requireContext(), null)
-        exercise = db.getExerciseByName(exerciseName)
+        exercise = db.getExerciseById(exerciseId)
 
         difficultys = db.getDifficultyList()
     }

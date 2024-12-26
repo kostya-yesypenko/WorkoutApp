@@ -185,6 +185,25 @@ class Database(val context: Context, factory: CursorFactory?) :
         )
     }
 
+    fun getExerciseById(id: Int): Exercise {
+        val query = "SELECT * FROM exercise WHERE id = ?"
+        val db = readableDatabase
+        val cursor = db.rawQuery(query, arrayOf(id.toString()))
+
+        cursor.moveToFirst()
+
+        return Exercise(
+            id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+            name = cursor.getString(cursor.getColumnIndexOrThrow("name")),
+            description = cursor.getString(cursor.getColumnIndexOrThrow("description")),
+            image = cursor.getString(cursor.getColumnIndexOrThrow("image")),
+            type = cursor.getString(cursor.getColumnIndexOrThrow("type")),
+            points = cursor.getInt(cursor.getColumnIndexOrThrow("points")),
+            reps = cursor.getInt(cursor.getColumnIndexOrThrow("reps")),
+            calories = cursor.getInt(cursor.getColumnIndexOrThrow("calories"))
+        )
+    }
+
     // Get the exercise list
     fun getExerciseList(): List<Exercise> {
         // Define the query
@@ -203,6 +222,7 @@ class Database(val context: Context, factory: CursorFactory?) :
             while (cursor.moveToNext()) {
                 // Get the exercise
                 val exercise = Exercise(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                     name = cursor.getString(cursor.getColumnIndexOrThrow("name")),
                     description = cursor.getString(cursor.getColumnIndexOrThrow("description")),
                     image = cursor.getString(cursor.getColumnIndexOrThrow("image")),
@@ -270,6 +290,96 @@ class Database(val context: Context, factory: CursorFactory?) :
                 type = "Strength",
                 points = 25,
                 reps = 10,
+                calories = 100
+            ),
+            Exercise(
+                name = "Біг",
+                description = "Біг - це чудовий спосіб підтримувати форму та здоров'я. Він покращує фізичну форму та здоров'я.",
+                image = "running",
+                type = "Cardio",
+                points = 30,
+                reps = 10,
+                calories = 100
+            ),
+            Exercise(
+                name = "Велосипед",
+                description = "Велосипед - це чудовий спосіб підтримувати форму та здоров'я. Він покращує фізичну форму та здоров'я.",
+                image = "cycling",
+                type = "Cardio",
+                points = 35,
+                reps = 10,
+                calories = 100
+            ),
+            Exercise(
+                name = "Стрибки на місці",
+                description = "Стрибки на місці допомагають розвивати кардіо витривалість і зміцнювати м'язи ніг.",
+                image = "jumping_jacks",
+                type = "Cardio",
+                points = 20,
+                reps = 30,
+                calories = 120
+            ),
+            Exercise(
+                name = "Скручування",
+                description = "Скручування - вправа для преса, яка покращує гнучкість і зміцнює м'язи черевного преса.",
+                image = "crunches",
+                type = "Core",
+                points = 15,
+                reps = 30,
+                calories = 80
+            ),
+            Exercise(
+                name = "Махи ногами",
+                description = "Махи ногами сприяють розвитку сили і витривалості в ногах, а також покращують баланс.",
+                image = "leg_swings",
+                type = "Strength",
+                points = 15,
+                reps = 20,
+                calories = 90
+            ),
+            Exercise(
+                name = "Підйом ніг",
+                description = "Підйом ніг допомагає тренувати м'язи живота і покращувати стабільність тіла.",
+                image = "leg_raises",
+                type = "Core",
+                points = 20,
+                reps = 20,
+                calories = 100
+            ),
+            Exercise(
+                name = "Сідання на стілець",
+                description = "Сідання на стілець - проста вправа для зміцнення ніг і сідниць, що виконується без обладнання.",
+                image = "chair_squats",
+                type = "Strength",
+                points = 20,
+                reps = 15,
+                calories = 110
+            ),
+            Exercise(
+                name = "Підйом на носки",
+                description = "Підйом на носки зміцнює м'язи литок і покращує координацію.",
+                image = "calf_raises",
+                type = "Strength",
+                points = 10,
+                reps = 25,
+                calories = 60
+            ),
+            Exercise(
+                name = "Скакалка",
+                description = "Стрибки через скакалку покращують кардіо витривалість і зміцнюють ноги.",
+                image = "jump_rope",
+                type = "Cardio",
+                points = 30,
+                reps = 30,
+                calories = 150
+            ),
+            Exercise(
+                name = "Тяга тіла до колін",
+                description = "Тяга тіла до колін допомагає зміцнити спину і покращити гнучкість.",
+                image = "body_pull_to_knees",
+                type = "Strength",
+                points = 20,
+                reps = 20,
                 calories = 100
             )
         )
