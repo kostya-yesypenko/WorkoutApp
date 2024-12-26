@@ -38,7 +38,7 @@ class ExerciseItemAdapter(
             }
 
             val bundle = Bundle().apply {
-                putString("exerciseName", exerciseItem.name.toString())
+                putInt("id", exerciseItem.id ?: 999)
             }
 
             binding.button.setOnClickListener {
