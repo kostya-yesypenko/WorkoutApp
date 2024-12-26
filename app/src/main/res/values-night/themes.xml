@@ -4,6 +4,8 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="backgroundColor">@color/backgroundColorDark</item>
+        <item name="progressColor">@color/porgressColorDark</item>
+        <item name="buttonColor">@color/buttonColorDark</item>
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>

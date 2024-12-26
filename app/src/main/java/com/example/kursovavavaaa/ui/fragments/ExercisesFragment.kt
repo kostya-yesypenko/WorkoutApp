@@ -13,15 +13,6 @@ import com.example.kursovavavaaa.data.Database
 import com.example.kursovavavaaa.data.entity.Exercise
 import com.example.kursovavavaaa.databinding.FragmentExercisesBinding
 
-//fun a():ArrayList<ExerciseItem> {
-//    val q = ArrayList<ExerciseItem>()
-//    q.add(ExerciseItem("11", "aaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaa ", 1))
-//    q.add(ExerciseItem("22", "bbbbbbbbbbbbbbb", 2))
-//    q.add(ExerciseItem("33", "cccccccccccccccccccccccccccccccccccccccc", 3))
-//    q.add(ExerciseItem("44", "ddddddddddddddddddddddddddddddddddddddddddddd", 4))
-//    return q
-//}
-
 class ExercisesFragment : Fragment() {
 
     private var _binding: FragmentExercisesBinding? = null

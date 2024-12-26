@@ -4,9 +4,9 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="backgroundColor">@color/backgroundColorLight</item>
+        <item name="progressColor">@color/porgressColorLight</item>
+        <item name="buttonColor">@color/buttonColorLight</item>
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
-
-    <style name="Theme.Kursovavavaaa" parent="Base.Theme.Kursovavavaaa" />
 </resources>
